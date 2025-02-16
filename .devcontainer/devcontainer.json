@@ -6,14 +6,16 @@
 	"image": "mcr.microsoft.com/devcontainers/go:1-1.23-bookworm",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+	"features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "go version",
-	"postCreateCommand": "sudo apt-get update && sudo apt-get install docker-ce-cli docker-buildx-plugin docker-compose-plugin"
+	"postCreateCommand": "go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest; curl -sSf https://atlasgo.sh | sh"
 	// Configure tool-specific properties.
 	// "customizations": {},
 
