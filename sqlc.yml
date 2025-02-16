@@ -1,0 +1,24 @@
+version: "2"
+sql:
+  # User service
+  - engine: "postgresql"
+    queries: "internal/user/infras/postgresql/query.sql"
+    schema: "internal/user/infras/postgresql/migrations"
+    gen:
+      go:
+        package: "postgresql"
+        out: "internal/post/infras/postgresql"
+        sql_package: "pgx/v5"
+        emit_json_tags: true
+        emit_empty_slices: true
+  # Post service
+  - engine: "postgresql"
+    queries: "internal/post/infras/postgresql/query.sql"
+    schema: "internal/post/infras/postgresql/migrations"
+    gen:
+      go:
+        package: "postgresql"
+        out: "internal/post/infras/postgresql"
+        sql_package: "pgx/v5"
+        emit_json_tags: true
+        emit_empty_slices: true
