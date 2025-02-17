@@ -1,13 +1,19 @@
 include .env
 
 # Define paths
-SCHEMA_FILE = ./internal/$(service)/infras/schema.hcl
-MIGRATIONS_DIR = file://internal/$(service)/infras/postgresql/migrations
+SCHEMA_FILE=./internal/$(service)/infras/schema.hcl
+MIGRATIONS_DIR=file://internal/$(service)/infras/postgresql/migrations
 
-DB_URL = $(if $(findstring user,$(service)),$(USER_DB_URL),\
-		 $(if $(findstring post,$(service)),$(POST_DB_URL),\
-		 "UNKNOWN_SERVICE"))
+ifeq ($(service),user)
+    DB_URL=$(USER_DB_URL)
+else ifeq ($(service),post)
+    DB_URL=$(POST_DB_URL)
+else
+    DB_URL=Unknown
+endif	
 
+db-url:
+	@echo "'$(DB_URL)'"
 # Function to check required variables
 check-service:
 	@if [ -z "$(service)" ]; then \
