@@ -1,5 +1,5 @@
 schema "user" {}
-table "users" {
+table "users"{
     schema = schema.user
     column "id" {
         type = uuid
